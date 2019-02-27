@@ -6,6 +6,7 @@ public class Transaction {
     private Account payee;
     private String purchaseType;
     private double value;
+
     private boolean isPaid = false;
 
     public Transaction(String date, Account payer, Account payee, String purchaseType, double value) {
@@ -22,10 +23,6 @@ public class Transaction {
             payee.increaseBalance(value);
             this.isPaid = true;
         }
-    }
-
-    public boolean isPaid() {
-        return isPaid;
     }
 
     public Account getPayer() {
