@@ -1,4 +1,4 @@
-package training.supportbank;
+package commands;
 
 public class QuitCommand implements Command {
 }

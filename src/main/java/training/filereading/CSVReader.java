@@ -1,10 +1,11 @@
-package training.supportbank;
+package filereading;
+
+import main.TransactionRecord;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.security.InvalidParameterException;
-import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.HashSet;
 

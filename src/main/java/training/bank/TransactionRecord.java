@@ -1,4 +1,4 @@
-package training.supportbank;
+package main;
 
 import java.security.InvalidParameterException;
 

@@ -1,4 +1,4 @@
-package training.supportbank;
+package main;
 
 public class Transaction {
     private String date;

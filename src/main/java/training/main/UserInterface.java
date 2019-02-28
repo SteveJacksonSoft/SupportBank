@@ -1,4 +1,9 @@
-package training.supportbank;
+package main;
+
+import commands.Command;
+import commands.ListAllCommand;
+import commands.ListSpecificAccountCommand;
+import commands.QuitCommand;
 
 import java.util.Scanner;
 

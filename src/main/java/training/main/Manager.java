@@ -1,9 +1,12 @@
-package training.supportbank;
+package main;
+
+import commands.Command;
+import commands.ListAllCommand;
+import commands.ListSpecificAccountCommand;
+import commands.QuitCommand;
 
 import java.io.IOException;
 import java.security.InvalidParameterException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Manager {
     private final UserInterface ui = new UserInterface();
