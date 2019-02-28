@@ -1,30 +1,45 @@
 package training.main;
 
-import training.bank.SupportBank;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import training.bank.Bank;
+import training.bank.BankService;
 import training.commands.Command;
 import training.commands.ListAllCommand;
 import training.commands.ListSpecificAccountCommand;
 import training.commands.QuitCommand;
 
-import java.io.IOException;
 import java.security.InvalidParameterException;
 
 public class Manager {
+    private static final Logger LOGGER = LogManager.getLogger();
     private final UserInterface ui = new UserInterface();
     private final String[] recordFiles = {
-            "transaction-records/Transactions2014.csv"
+            "transaction-records/Transactions2014.csv",
+            "transaction-records/Transactions2015.csv"
     };
 
-    private SupportBank bank;
+    private BankService bankService;
 
-    public Manager(SupportBank bank) {
-        this.bank = bank;
+    public Manager(BankService bankService) {
+        this.bankService = bankService;
     }
 
     public void run() {
         this.updateBank();
         ui.welcome();
         this.carryOutService();
+    }
+
+    private void updateBank() {
+        for (String filePath: recordFiles) {
+            try {
+                bankService.updateFromRecordsFile(filePath);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+                System.out.println("Any records in the given file will not be added to the database.");
+            }
+        }
     }
 
     private void carryOutService() {
@@ -38,34 +53,23 @@ public class Manager {
             this.executeListAllCommand();
         } else {
             System.out.println("You have not entered a valid command. Please try again.");
-            run();
+            this.carryOutService();
         }
         if (ui.userWantsNewAction()) {
-            carryOutService();
+            this.carryOutService();
         }
     }
 
     private void executeListAllCommand() {
-        bank.listAll();
+        bankService.listAllAccounts();
     }
 
     private void executeListCommand(String accountName) {
         try {
-            bank.list(accountName);
+            bankService.listAccount(accountName);
         } catch (InvalidParameterException e) {
             System.out.println(e.getMessage());
             run();
-        }
-    }
-
-    private void updateBank() {
-        for (String filePath: recordFiles) {
-            try {
-                bank.updateFromRecordsFile(filePath);
-            } catch (IOException e) {
-                System.out.println(e.getMessage());
-                System.out.println("Any records in the given file will not be added to the database.");
-            }
         }
     }
 }
