@@ -18,7 +18,6 @@ public class Manager {
     }
 
     public void run() {
-        List<Integer> list = new ArrayList<>();
         this.updateBank();
         ui.welcome();
         Command command = ui.getCommand();
