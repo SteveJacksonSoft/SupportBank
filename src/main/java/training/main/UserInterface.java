@@ -1,9 +1,9 @@
-package main;
+package training.main;
 
-import commands.Command;
-import commands.ListAllCommand;
-import commands.ListSpecificAccountCommand;
-import commands.QuitCommand;
+import training.commands.Command;
+import training.commands.ListAllCommand;
+import training.commands.ListSpecificAccountCommand;
+import training.commands.QuitCommand;
 
 import java.util.Scanner;
 
@@ -12,6 +12,7 @@ public class UserInterface {
 
     public void welcome() {
         System.out.println("Welcome to the support bank.");
+        System.out.println("============================");
     }
 
     public Command getCommand() {
@@ -19,7 +20,20 @@ public class UserInterface {
         return processCommand(input);
     }
 
-    public String promptForCommand() {
+    public boolean userWantsNewAction() {
+        System.out.print("Would you like to execute a new command (y/n)? > ");
+        String input = scanner.nextLine().trim();
+        if (input.equals("y")) {
+            return true;
+        } else if (input.equals("n")) {
+            return false;
+        } else {
+            System.out.println("I'll take that as a no.");
+            return false;
+        }
+    }
+
+    private String promptForCommand() {
         System.out.println("Commands:");
         System.out.println("'q' = [quit]");
         System.out.println("'list *name*' = [prints list of transactions involving the account owned by *name*]");

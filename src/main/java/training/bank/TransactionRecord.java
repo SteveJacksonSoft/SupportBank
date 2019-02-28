@@ -1,5 +1,6 @@
-package main;
+package training.bank;
 
+import java.math.BigDecimal;
 import java.security.InvalidParameterException;
 
 public class TransactionRecord {
@@ -7,9 +8,9 @@ public class TransactionRecord {
     private String debtor;
     private String creditor;
     private String narrative;
-    private double amount;
+    private BigDecimal amount;
 
-    public TransactionRecord(String[] args) throws InvalidParameterException{
+    public TransactionRecord(String[] args) throws InvalidParameterException, NumberFormatException{
         if (args.length < 5) {
             throw new InvalidParameterException();
         }
@@ -17,10 +18,10 @@ public class TransactionRecord {
         this.debtor = args[1];
         this.creditor = args[2];
         this.narrative = args[3];
-        this.amount = Double.parseDouble(args[4]);
+        this.amount = new BigDecimal(args[4]);
     }
 
-    public TransactionRecord(String date, String debtor, String creditor, String narrative, double amount) {
+    public TransactionRecord(String date, String debtor, String creditor, String narrative, BigDecimal amount) {
 //        if (date.matches(""))
         this.date = date;
         this.debtor = debtor;
@@ -45,7 +46,7 @@ public class TransactionRecord {
         return creditor;
     }
 
-    public double getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 }

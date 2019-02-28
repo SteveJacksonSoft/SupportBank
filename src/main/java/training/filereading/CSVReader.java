@@ -1,6 +1,6 @@
-package filereading;
+package training.filereading;
 
-import main.TransactionRecord;
+import training.bank.TransactionRecord;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -37,7 +37,7 @@ public class CSVReader {
         return linesOfInput;
     }
 
-    private TransactionRecord parseRecord(String line) throws InvalidParameterException {
+    private TransactionRecord parseRecord(String line) throws InvalidParameterException, NumberFormatException {
 
         String[] entries = line.split(",");
         return new TransactionRecord(entries);

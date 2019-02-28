@@ -1,15 +1,17 @@
-package main;
+package training.bank;
+
+import java.math.BigDecimal;
 
 public class Transaction {
     private String date;
     private Account payer;
     private Account payee;
     private String purchaseType;
-    private double value;
+    private BigDecimal value;
 
     private boolean isPaid = false;
 
-    public Transaction(String date, Account payer, Account payee, String purchaseType, double value) {
+    public Transaction(String date, Account payer, Account payee, String purchaseType, BigDecimal value) {
         this.date = date;
         this.payer = payer;
         this.payee = payee;

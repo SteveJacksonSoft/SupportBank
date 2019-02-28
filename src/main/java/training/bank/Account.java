@@ -1,10 +1,11 @@
-package main;
+package training.bank;
 
+import java.math.BigDecimal;
 import java.util.HashSet;
 
 public class Account {
     private String owner;
-    private double balance;
+    private BigDecimal balance = BigDecimal.ZERO;
     private HashSet<Transaction> debts = new HashSet<>();
     private HashSet<Transaction> credits = new HashSet<>();
 
@@ -12,19 +13,19 @@ public class Account {
         this.owner = owner;
     }
 
-    public void increaseBalance(double amount) {
-        balance += amount;
+    public void increaseBalance(BigDecimal amount) {
+        balance = balance.add(amount);
     }
 
-    public void decreaseBalance(double amount) {
-        balance -= amount;
+    public void decreaseBalance(BigDecimal amount) {
+        balance = balance.subtract(amount);
     }
 
     public String getOwner() {
         return owner;
     }
 
-    public double getBalance() {
+    public BigDecimal getBalance() {
         this.payTransactions();
         return balance;
     }

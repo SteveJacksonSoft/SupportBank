@@ -1,4 +1,4 @@
-package commands;
+package training.commands;
 
 public interface Command {
 }

@@ -1,8 +1,9 @@
-package main;
+package training.bank;
 
-import filereading.CSVReader;
+import training.filereading.CSVReader;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.security.InvalidParameterException;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -38,7 +39,7 @@ public class SupportBank {
         Account debtor = accounts.get(transactionRecord.getDebtor());
         Account creditor = accounts.get(transactionRecord.getCreditor()); // Is it bad practice to assume that debtor and creditor are already in accounts?
         String purchaseType = transactionRecord.getNarrative();
-        double amount = transactionRecord.getAmount();
+        BigDecimal amount = transactionRecord.getAmount();
 
         Transaction newTransaction = new Transaction( date, debtor, creditor, purchaseType, amount);
         transactions.add(newTransaction);

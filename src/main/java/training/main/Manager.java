@@ -1,9 +1,10 @@
-package main;
+package training.main;
 
-import commands.Command;
-import commands.ListAllCommand;
-import commands.ListSpecificAccountCommand;
-import commands.QuitCommand;
+import training.bank.SupportBank;
+import training.commands.Command;
+import training.commands.ListAllCommand;
+import training.commands.ListSpecificAccountCommand;
+import training.commands.QuitCommand;
 
 import java.io.IOException;
 import java.security.InvalidParameterException;
@@ -23,6 +24,10 @@ public class Manager {
     public void run() {
         this.updateBank();
         ui.welcome();
+        this.carryOutService();
+    }
+
+    private void carryOutService() {
         Command command = ui.getCommand();
         if (command instanceof QuitCommand) {
             System.out.println("Programme exiting.");
@@ -34,6 +39,9 @@ public class Manager {
         } else {
             System.out.println("You have not entered a valid command. Please try again.");
             run();
+        }
+        if (ui.userWantsNewAction()) {
+            carryOutService();
         }
     }
 
