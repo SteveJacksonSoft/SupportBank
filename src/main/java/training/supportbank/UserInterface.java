@@ -5,6 +5,10 @@ import java.util.Scanner;
 public class UserInterface {
     private final Scanner scanner = new Scanner(System.in);
 
+    public void welcome() {
+        System.out.println("Welcome to the support bank.");
+    }
+
     public Command getCommand() {
         String input = promptForCommand();
         return processCommand(input);
@@ -38,7 +42,7 @@ public class UserInterface {
                 if (words.length == 2 && words[1].equals("all")){
                     return new ListAllCommand();
                 } else {
-                    return new ListSpecificAccountCommand(String.join(""));
+                    return new ListSpecificAccountCommand(input.substring(4).trim());
                 }
             }
         }
