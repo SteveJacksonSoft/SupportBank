@@ -34,8 +34,10 @@ public class Manager {
     private void updateBank() {
         for (String filePath: recordFiles) {
             try {
+                LOGGER.info("Importing records from " + filePath);
                 bankService.updateFromRecordsFile(filePath);
             } catch (Exception e) {
+                LOGGER.error("There was a problem importing the transactions from " + filePath);
                 System.out.println(e.getMessage());
                 System.out.println("Any records in the given file will not be added to the database.");
             }
@@ -55,9 +57,7 @@ public class Manager {
             System.out.println("You have not entered a valid command. Please try again.");
             this.carryOutService();
         }
-        if (ui.userWantsNewAction()) {
-            this.carryOutService();
-        }
+        this.carryOutService();
     }
 
     private void executeListAllCommand() {
@@ -69,7 +69,6 @@ public class Manager {
             bankService.listAccount(accountName);
         } catch (InvalidParameterException e) {
             System.out.println(e.getMessage());
-            run();
         }
     }
 }

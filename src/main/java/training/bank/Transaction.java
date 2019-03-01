@@ -1,9 +1,10 @@
 package training.bank;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 public class Transaction {
-    private String date;
+    private LocalDate date;
     private Account payer;
     private Account payee;
     private String purchaseType;
@@ -11,7 +12,7 @@ public class Transaction {
 
     private boolean isPaid = false;
 
-    public Transaction(String date, Account payer, Account payee, String purchaseType, BigDecimal value) {
+    public Transaction(LocalDate date, Account payer, Account payee, String purchaseType, BigDecimal value) {
         this.date = date;
         this.payer = payer;
         this.payee = payee;

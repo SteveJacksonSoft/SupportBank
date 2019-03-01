@@ -20,19 +20,6 @@ public class UserInterface {
         return processCommand(input);
     }
 
-    public boolean userWantsNewAction() {
-        System.out.print("Would you like to execute a new command (y/n)? > ");
-        String input = scanner.nextLine().trim();
-        if (input.equals("y")) {
-            return true;
-        } else if (input.equals("n")) {
-            return false;
-        } else {
-            System.out.println("I'll take that as a no.");
-            return false;
-        }
-    }
-
     private String promptForCommand() {
         System.out.println("Commands:");
         System.out.println("'q' = [quit]");
