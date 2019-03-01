@@ -7,5 +7,6 @@ import java.util.HashSet;
 
 public interface Reader {
 
-    HashSet<TransactionRecord> importTransactionRecords(String filePath) throws IOException, NumberFormatException;
+    HashSet<TransactionRecord> getRecordsFromFile(String filePath) throws IOException, NumberFormatException;
+
 }

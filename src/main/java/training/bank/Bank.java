@@ -55,7 +55,7 @@ public class Bank {
         return this.accounts.getOrDefault(accountName, null);
     }
 
-    public void payDebts() {
+    public void payTransactions() {
         transactions.forEach(Transaction::pay);
     }
 }

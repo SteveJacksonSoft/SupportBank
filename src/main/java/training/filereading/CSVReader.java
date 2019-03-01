@@ -16,9 +16,10 @@ public class CSVReader implements Reader {
     private static final Logger LOGGER = LogManager.getLogger();
     // input line format: Date, Debtor, Creditor, purchase type, amount
 
-    public HashSet<TransactionRecord> importTransactionRecords(String filePath) throws IOException, NumberFormatException {
-        HashSet<TransactionRecord> newTransactionRecords = new HashSet<>();
+    public HashSet<TransactionRecord> getRecordsFromFile(String filePath) throws IOException, NumberFormatException {
         ArrayList<String> linesOfInput = this.readFile(filePath);
+        HashSet<TransactionRecord> newTransactionRecords = new HashSet<>();
+
         for (int index = 1; index < linesOfInput.size(); index++) {
             try {
                 LOGGER.debug("Adding new transaction record from line " + index + " of file: " + filePath);
@@ -36,6 +37,7 @@ public class CSVReader implements Reader {
                         + " of file: " + filePath);
             }
         }
+
         return newTransactionRecords;
     }
 

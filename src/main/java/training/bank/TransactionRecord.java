@@ -27,6 +27,14 @@ public class TransactionRecord {
         this.amount = new BigDecimal(args[4]);
     }
 
+    public TransactionRecord(LocalDate date, String payer, String payee, String narrative, BigDecimal amount) {
+        this.date = date;
+        this.payer = payer.toLowerCase();
+        this.payee = payee.toLowerCase();
+        this.narrative = narrative;
+        this.amount = amount;
+    }
+
     public String getDateAsString() {
         return date.toString();
     }

@@ -36,7 +36,8 @@ public class Transaction {
         return payee;
     }
 
-    public void print() {
-        System.out.format("%8s | %10s pays %10s for %20s : £%.2f\n", date, payer.getOwner(), payee.getOwner(), purchaseType, value);
+    public String toString() {
+        return String.format("%8s | %10s pays %10s for %40s : £%.2f\n", date, payer.getOwner(), payee.getOwner(), purchaseType, value);
+//        System.out.format("%8s | %10s pays %10s for %40s : £%.2f\n", date, payer.getOwner(), payee.getOwner(), purchaseType, value);
     }
 }

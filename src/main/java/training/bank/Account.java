@@ -1,7 +1,10 @@
 package training.bank;
 
+import java.lang.reflect.Array;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 
 public class Account {
     private String owner;
@@ -38,14 +41,16 @@ public class Account {
         }
     }
 
-    public void printBalance() {
-        System.out.format("%10s: £%.2f\n", owner, balance);
+    public String writeBalance() {
+        return String.format("%10s: £%.2f\n", owner, balance);
     }
 
-    public void printTransactions() {
+    public List<Transaction> getTransactions() {
         this.payTransactions();
-        debts.forEach(Transaction::print);
-        credits.forEach(Transaction::print);
+        ArrayList<Transaction> transactionStrings = new ArrayList<>();
+        transactionStrings.addAll(this.debts);
+        transactionStrings.addAll(this.credits);
+        return transactionStrings;
     }
 
     private void payTransactions() {

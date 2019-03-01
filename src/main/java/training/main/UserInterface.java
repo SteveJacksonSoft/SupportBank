@@ -1,10 +1,14 @@
 package training.main;
 
+import training.bank.Account;
+import training.bank.Transaction;
 import training.commands.Command;
 import training.commands.ListAllCommand;
 import training.commands.ListSpecificAccountCommand;
 import training.commands.QuitCommand;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.Scanner;
 
 public class UserInterface {
@@ -19,6 +23,16 @@ public class UserInterface {
         String input = promptForCommand();
         return processCommand(input);
     }
+
+    public void printTransactions(List<Transaction> transactionList) {
+        transactionList.forEach(System.out::println);
+    }
+
+    public void printAccountBalances(Collection<Account> accounts) {
+        System.out.format("%10s : Balance\n", "Name");
+        accounts.forEach(account -> System.out.println(account.writeBalance()));
+    }
+
 
     private String promptForCommand() {
         System.out.println("Commands:");

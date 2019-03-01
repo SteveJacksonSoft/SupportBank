@@ -2,21 +2,25 @@ package training.main;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import training.bank.Bank;
+import training.bank.Account;
 import training.bank.BankService;
+import training.bank.Transaction;
 import training.commands.Command;
 import training.commands.ListAllCommand;
 import training.commands.ListSpecificAccountCommand;
 import training.commands.QuitCommand;
 
 import java.security.InvalidParameterException;
+import java.util.Collection;
+import java.util.List;
 
 public class Manager {
     private static final Logger LOGGER = LogManager.getLogger();
     private final UserInterface ui = new UserInterface();
     private final String[] recordFiles = {
             "transaction-records/Transactions2014.csv",
-            "transaction-records/Transactions2015.csv"
+            "transaction-records/Transactions2015.csv",
+            "transaction-records/Transactions2013.json"
     };
 
     private BankService bankService;
@@ -28,6 +32,7 @@ public class Manager {
     public void run() {
         this.updateBank();
         ui.welcome();
+        bankService.payTransactions();
         this.carryOutService();
     }
 
@@ -61,12 +66,15 @@ public class Manager {
     }
 
     private void executeListAllCommand() {
-        bankService.listAllAccounts();
+        Collection<Account> accounts = bankService.getAllAccounts();
+        LOGGER.debug("Listing all accounts.");
+        ui.printAccountBalances(accounts);
     }
 
     private void executeListCommand(String accountName) {
         try {
-            bankService.listAccount(accountName);
+            List<Transaction> transactionList = bankService.getAccountTransactions(accountName);
+            ui.printTransactions(transactionList);
         } catch (InvalidParameterException e) {
             System.out.println(e.getMessage());
         }
