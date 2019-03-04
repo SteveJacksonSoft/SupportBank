@@ -1,4 +1,4 @@
 package training.commands;
 
-public class ListAllCommand implements Command {
+public class ListAllCommand extends Command {
 }

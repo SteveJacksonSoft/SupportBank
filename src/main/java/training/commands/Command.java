@@ -1,4 +1,4 @@
 package training.commands;
 
-public interface Command {
+public abstract class Command {
 }

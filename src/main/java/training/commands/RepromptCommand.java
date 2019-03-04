@@ -1,4 +1,4 @@
 package training.commands;
 
-public class RepromptCommand implements Command {
+public class RepromptCommand extends Command {
 }

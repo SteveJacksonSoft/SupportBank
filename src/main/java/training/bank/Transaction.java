@@ -1,6 +1,7 @@
 package training.bank;
 
 import java.math.BigDecimal;
+import java.text.NumberFormat;
 import java.time.LocalDate;
 
 public class Transaction {
@@ -10,8 +11,6 @@ public class Transaction {
     private String purchaseType;
     private BigDecimal value;
 
-    private boolean isPaid = false;
-
     public Transaction(LocalDate date, Account payer, Account payee, String purchaseType, BigDecimal value) {
         this.date = date;
         this.payer = payer;
@@ -20,12 +19,8 @@ public class Transaction {
         this.value = value;
     }
 
-    public void pay() {
-        if (!this.isPaid) {
-            payer.decreaseBalance(value);
-            payee.increaseBalance(value);
-            this.isPaid = true;
-        }
+    public BigDecimal getValue() {
+        return value;
     }
 
     public Account getPayer() {
@@ -37,7 +32,8 @@ public class Transaction {
     }
 
     public String toString() {
-        return String.format("%8s | %10s pays %10s for %40s : £%.2f\n", date, payer.getOwner(), payee.getOwner(), purchaseType, value);
-//        System.out.format("%8s | %10s pays %10s for %40s : £%.2f\n", date, payer.getOwner(), payee.getOwner(), purchaseType, value);
+        NumberFormat formatter = NumberFormat.getCurrencyInstance();
+        return String.format("%8s | %10s pays %10s for %40s: %s\n",
+                date, payer.getOwner(), payee.getOwner(), purchaseType, formatter.format(value));
     }
 }

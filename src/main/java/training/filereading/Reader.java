@@ -3,10 +3,10 @@ package training.filereading;
 import training.bank.TransactionRecord;
 
 import java.io.IOException;
-import java.util.HashSet;
+import java.util.List;
 
 public interface Reader {
 
-    HashSet<TransactionRecord> getRecordsFromFile(String filePath) throws IOException, NumberFormatException;
+    List<TransactionRecord> getRecordsFromFile(String filePath) throws IOException, NumberFormatException;
 
 }

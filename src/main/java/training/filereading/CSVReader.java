@@ -10,15 +10,15 @@ import java.io.IOException;
 import java.security.InvalidParameterException;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.List;
 
 public class CSVReader implements Reader {
     private static final Logger LOGGER = LogManager.getLogger();
     // input line format: Date, Debtor, Creditor, purchase type, amount
 
-    public HashSet<TransactionRecord> getRecordsFromFile(String filePath) throws IOException, NumberFormatException {
-        ArrayList<String> linesOfInput = this.readFile(filePath);
-        HashSet<TransactionRecord> newTransactionRecords = new HashSet<>();
+    public List<TransactionRecord> getRecordsFromFile(String filePath) throws IOException, NumberFormatException {
+        List<String> linesOfInput = this.readFile(filePath);
+        List<TransactionRecord> newTransactionRecords = new ArrayList<>();
 
         for (int index = 1; index < linesOfInput.size(); index++) {
             try {

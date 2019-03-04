@@ -32,7 +32,6 @@ public class Manager {
     public void run() {
         this.updateBank();
         ui.welcome();
-        bankService.payTransactions();
         this.carryOutService();
     }
 

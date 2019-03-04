@@ -7,7 +7,6 @@ import training.filereading.TransactionRecordImporter;
 import java.io.IOException;
 import java.security.InvalidParameterException;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
 
 public class BankService {
@@ -20,13 +19,9 @@ public class BankService {
     }
 
     public void updateFromRecordsFile(String filePath) throws IOException, NumberFormatException {
-        HashSet<TransactionRecord> newTransactionRecords;
+        List<TransactionRecord> newTransactionRecords;
         newTransactionRecords = recordImporter.importTransactionRecords(filePath);
         newTransactionRecords.forEach(bank::updateWithTransactionRecord);
-    }
-
-    public void payTransactions() {
-        bank.payTransactions();
     }
 
     public List<Transaction> getAccountTransactions(String accountName) throws InvalidParameterException {

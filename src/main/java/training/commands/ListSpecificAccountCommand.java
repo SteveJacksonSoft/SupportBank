@@ -1,6 +1,6 @@
 package training.commands;
 
-public class ListSpecificAccountCommand implements Command {
+public class ListSpecificAccountCommand extends Command {
 
     private String accountName;
 

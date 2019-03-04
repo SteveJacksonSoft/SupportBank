@@ -1,10 +1,11 @@
 package training.bank;
 
-import java.lang.reflect.Array;
 import java.math.BigDecimal;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 
 public class Account {
     private String owner;
@@ -16,11 +17,11 @@ public class Account {
         this.owner = owner;
     }
 
-    public void increaseBalance(BigDecimal amount) {
+    private void increaseBalance(BigDecimal amount) {
         balance = balance.add(amount);
     }
 
-    public void decreaseBalance(BigDecimal amount) {
+    private void decreaseBalance(BigDecimal amount) {
         balance = balance.subtract(amount);
     }
 
@@ -28,33 +29,25 @@ public class Account {
         return owner;
     }
 
-    public BigDecimal getBalance() {
-        this.payTransactions();
-        return balance;
-    }
-
-    public void updateTransactions(Transaction transaction) { // Is this adding unnecessary complexity?
+    public void updateAndPayTransactions(Transaction transaction) { // Is this adding unnecessary complexity?
         if (transaction.getPayer().equals(this)) {
             this.debts.add(transaction);
+            this.decreaseBalance(transaction.getValue());
         } else if (transaction.getPayee().equals(this)) {
             this.credits.add(transaction);
+            this.increaseBalance((transaction.getValue()));
         }
     }
 
     public String writeBalance() {
-        return String.format("%10s: £%.2f\n", owner, balance);
+        NumberFormat format = NumberFormat.getCurrencyInstance();
+        return String.format("%10s: %s\n", this.owner, format.format(this.balance));
     }
 
     public List<Transaction> getTransactions() {
-        this.payTransactions();
-        ArrayList<Transaction> transactionStrings = new ArrayList<>();
+        List<Transaction> transactionStrings = new ArrayList<>();
         transactionStrings.addAll(this.debts);
         transactionStrings.addAll(this.credits);
         return transactionStrings;
-    }
-
-    private void payTransactions() {
-        debts.forEach(Transaction::pay);
-        credits.forEach(Transaction::pay);
     }
 }
